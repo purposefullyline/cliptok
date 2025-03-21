@@ -8,6 +8,11 @@ const PORT = process.env.PORT || 5000;
 app.use(cors({ origin: "*" })); // Allow frontend to access API
 app.use(express.json());
 
+// ✅ Add Root Route (Fixes "Cannot GET /" Error)
+app.get("/", (req, res) => {
+    res.send("TikTok Downloader API is running! 🚀");
+});
+
 // ✅ Function to Extract TikTok Video ID from URL
 function extractTikTokVideoId(url) {
     const match = url.match(/(?:https?:\/\/)?(?:www\.)?tiktok\.com\/(?:@[\w.-]+\/video\/|t\/|v\/|embed\/|)(\d+)/);
