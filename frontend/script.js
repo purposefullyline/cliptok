@@ -17,8 +17,10 @@ document.addEventListener("DOMContentLoaded", () => {
         downloadBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Downloading...';
         downloadBtn.disabled = true;
 
-        // Call backend API
-        fetch(`http://127.0.0.1:5000/download/tiktok?url=${encodeURIComponent(url)}`)
+        // ✅ Use the deployed backend URL instead of localhost
+        const apiUrl = `https://cliptok-git-main-purposefullylines-projects.vercel.app/download/tiktok?url=${encodeURIComponent(url)}`;
+
+        fetch(apiUrl)
             .then(response => response.json())
             .then(data => {
                 if (data.videoUrl) {
@@ -36,6 +38,12 @@ document.addEventListener("DOMContentLoaded", () => {
                 downloadBtn.disabled = false;
             });
     });
+
+    // ✅ Function to validate TikTok URLs
+    function isValidTikTokUrl(url) {
+        return /(?:https?:\/\/)?(?:www\.)?tiktok\.com\/(?:@[\w.-]+\/video\/|t\/|v\/|embed\/|)(\d+)/.test(url);
+    }
+});
 
     // ✅ Function to Validate TikTok URLs
     function isValidTikTokUrl(url) {
