@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", () => { 
     const form = document.getElementById("download-form");
     const inputField = document.getElementById("tiktok-url");
     const downloadBtn = document.querySelector(".download-btn");
@@ -41,14 +41,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // ✅ Function to validate TikTok URLs
     function isValidTikTokUrl(url) {
-        return /(?:https?:\/\/)?(?:www\.)?tiktok\.com\/(?:@[\w.-]+\/video\/|t\/|v\/|embed\/|)(\d+)/.test(url);
-    }
-});
-
-    // ✅ Function to Validate TikTok URLs
-    function isValidTikTokUrl(url) {
         const tiktokRegex = /^(https?:\/\/)?(www\.)?(tiktok\.com\/|vm\.tiktok\.com\/|vt\.tiktok\.com\/)/;
         return tiktokRegex.test(url);
     }
 });
-

@@ -1,6 +1,7 @@
-const express = require("express");
+const express = require("express"); 
 const axios = require("axios");
 const cors = require("cors");
+const path = require("path");
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -8,10 +9,8 @@ const PORT = process.env.PORT || 5000;
 app.use(cors({ origin: "*" })); // Allow frontend to access API
 app.use(express.json());
 
-// ✅ Add Root Route (Fixes "Cannot GET /" Error)
-app.get("/", (req, res) => {
-    res.send("TikTok Downloader API is running! 🚀");
-});
+// ✅ Serve Frontend Files (HTML, CSS, JS)
+app.use(express.static(path.join(__dirname, "public"))); 
 
 // ✅ Function to Extract TikTok Video ID from URL
 function extractTikTokVideoId(url) {
@@ -49,6 +48,11 @@ app.get("/download/tiktok", async (req, res) => {
             details: error.response?.data || error.message 
         });
     }
+});
+
+// ✅ Catch-All Route (Serve Frontend)
+app.get("*", (req, res) => {
+    res.sendFile(path.join(__dirname, "public", "index.html"));
 });
 
 // ✅ Start Server
